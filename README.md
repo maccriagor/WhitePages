@@ -1,51 +1,27 @@
-# Challenge Name: m00nwalk2
+# Challenge Name: WhitePages
 **Category:** Forensics  
 **Platform:** picoCTF 2019  
 **Points:** no info.
 
 ## Description
-Revisit the last transmission. We think this transmission contains a hidden message. There are also some clues : Clue 1, Clue 2, Clue 3.
-Link to transmission : https://challenge-files.picoctf.net/c_fickle_tempest/43e77de115ba9b931f7e1c33b128045d7754eb3c999f81693f185be52ccf6dc9/message.wav.
-
-Link to Clue 1 : https://challenge-files.picoctf.net/c_fickle_tempest/43e77de115ba9b931f7e1c33b128045d7754eb3c999f81693f185be52ccf6dc9/clue1.wav .
-
-Link to Clue 2 : https://challenge-files.picoctf.net/c_fickle_tempest/43e77de115ba9b931f7e1c33b128045d7754eb3c999f81693f185be52ccf6dc9/clue2.wav .
-
-Link to Clue 3 : https://challenge-files.picoctf.net/c_fickle_tempest/43e77de115ba9b931f7e1c33b128045d7754eb3c999f81693f185be52ccf6dc9/clue3.wav .
+I stopped using YellowPages and moved onto WhitePages... but the page they gave me is all blank!
+Link to WhitePages .txt file : https://challenge-files.picoctf.net/c_fickle_tempest/ab5453de03105a8aab9c68b0b46e66a4fe0a781c3915ab519f7fab31b3ce6894/whitepages.txt
 ## Challenge Hints
-Use the clues to extract the another flag from the .wav file.
-## Personal Hints
-1. You only need to care about decoding Clue 1 and Clue 3 on RX-SSTV , the rest can be ignored or only matter when we are on different tool.
-2. RX-SSTV should automatically pick the right RX option for you right after you play an audio file.
+There is data encoded somewhere... there might be an online decoder.
 ## Analysis
-- The challenge gives 4 files total which include the following content :
-  1. Transmission :
-  
- <a href="https://imgbb.com/"><img src="https://i.ibb.co/wNrHSLmC/2025-12-03-04-33-45.jpg" alt="2025-12-03-04-33-45" border="0"></a>
- 
-  2. Clue 1 :
-     
-  <a href="https://imgbb.com/"><img src="https://i.ibb.co/cSLQHTP6/2025-12-03-17-30-12.jpg" alt="2025-12-03-17-30-12" border="0"></a>
-
-  3. Clue 2 :
-     
-  <a href="https://imgbb.com/"><img src="https://i.ibb.co/cSLQHTP6/2025-12-03-17-30-12.jpg" alt="2025-12-03-17-30-12" border="0"></a>
-  
-  4. Clue 3 :
-     
-  <a href="https://imgbb.com/"><img src="https://i.ibb.co/RkG7F9Bz/2025-12-03-12-50-48.jpg" alt="2025-12-03-12-50-48" border="0"></a>
-
+- The challenge gives you a "blank page" that seemingly contains nothing but when you use cat to see its content, it shows that there are several empty lines.
+- If you open the .txt file and try to select everything inside, theres still nothing to be shown.
+- I got the solution for this challenge when searching "blank page ctf" to see if there are similar results because i dont know which "online decoder" is even hinted at from the challenge since my mind was thinking a decoder here must be specialized for blank page or something like that.
+- Prop to Almond Force for his solution to a challenge on ctflearn that is similar to the one on picoCTF : https://www.youtube.com/watch?v=G2Te73TA7H0.
 ## Solution
 Step-by-step explanation:
 
-Download the following tool for decoding the .wav files ( RX-SSTV ) : https://www.qsl.net/on6mu/rxsstv.htm.
+Download the following tool for hex editing : https://mh-nexus.de/en/hxd/
 
-Download the following tool to support the decoder ( Virtual Audio Cable ) : https://vac.muzychenko.net/en/
+Visit CyberChef to decode the message : https://gchq.github.io/CyberChef/
 
-Visit ALan Eliasen the future boy steganography tool : https://futureboy.us/stegano/
-
-1. Select your device sound output ( right side of the volume bar ) to Line 1 which is the Virtual Audio Cable.
-2. In RX-SSTV , pick setup -> Sound Control and Devices -> Pick line 1.
+1. Open the .txt file on hex editor (HxD).
+2. While the decode text session on hex editor shows a bunch of gibberish , there are only 3 "letters" being repeated which is "f","a","e" alongside blank spaces. On the offset side, you will see these 4 strings being repeated : e2,80.83 and 20.
 
 * This setting help the RX-SSTV to listen to your .wav file so it can decode the image, remember to switch the device sound output back after finishing with decoding.
   
@@ -59,4 +35,4 @@ Visit ALan Eliasen the future boy steganography tool : https://futureboy.us/steg
 
 5. Choose the Transmission .wav file and enter the password given in Clue 1 ( hidden_stegosaurus ) , pick View raw output as MIME-type (text/plain).
 ## Result
-The flag for this challenge is picoCTF{the_answer_lies_hidden_in_plain_sight}. 
+The flag for this challenge is picoCTF{not_all_spaces_are_created_equal_bbc4f54c75763bd78dc840f05eb7a752}. 
